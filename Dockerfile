@@ -3,8 +3,9 @@ FROM    debian:latest
 #Update & Install required applications
 RUN apt-get update &&\
     apt-get upgrade -y &&\
-    apt-get install apache2 apache2-utils subversion libsvn-dev libapache2-mod-svn subversion-tools -y
-
+    apt-get install apache2 apache2-utils subversion libsvn-dev libapache2-mod-svn subversion-tools -y \
+    apt-get clean
+    
 #Enable Apache features
 RUN a2enmod dav &&\
     a2enmod dav_svn &&\

@@ -20,13 +20,13 @@ RUN mkdir -p /etc/svn &&\
 
 #Variables - ToDo replace with dummies
 ENV SVN_SYNC_USER=user1 \
-	SVN_SYNC_PW=secret1 \
-	SVN_SYNC_MASTER=https://host.domain.lan/svn/live/ \
+    SVN_SYNC_PW=secret1 \
+    SVN_SYNC_MASTER=https://host.domain.lan/svn/live/ \
     SVN_DIRECTORY=/var/www/svn \
     #true for testing
     SVN_WORKLOAD_IS_IMPORTER=false \
     SVN_CLIENT_USER=user2 \
-	SVN_CLIENT_PW=secret2
+    SVN_CLIENT_PW=secret2
 
 #Fix Module errors
 COPY ./fixes/dav.load /etc/apache2/mods-available/dav.load

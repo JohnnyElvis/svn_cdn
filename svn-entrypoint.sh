@@ -16,20 +16,19 @@ if [ ${SVN_WORKLOAD_IS_IMPORTER} = true ]; then
 
         sleep 1
         #Create SVN repository
-        svnadmin create --fs-type fsfs ${SVN_DIRECTORY}/live
+        svnadmin create --fs-type fsfs ${SVN_DIRECTORY}/${SVN_REPOSITORY}
 
         #Copy pre-revprop
-        cp pre-revprop-change ${SVN_DIRECTORY}/live/hooks/pre-revprop-change
+        cp pre-revprop-change ${SVN_DIRECTORY}/${SVN_REPOSITORY}/hooks/pre-revprop-change
 
 
-        #chown svnadm:svnadm /var/www/svn/live/hooks/pre-revprop-change
-        chmod +x ${SVN_DIRECTORY}/live/hooks/pre-revprop-change
+        chmod +x ${SVN_DIRECTORY}/${SVN_REPOSITORY}/hooks/pre-revprop-change
         chown svnadm:svnadm ${SVN_DIRECTORY} -R
 
         sleep 1
 
         #SVN Repo init
-        su - svnadm -c "svnsync initialize --non-interactive --username ${SVN_SYNC_USER} --password ${SVN_SYNC_PW} --trust-server-cert file://${SVN_DIRECTORY}/live ${SVN_SYNC_MASTER}"
+        su - svnadm -c "svnsync initialize --non-interactive --username ${SVN_SYNC_USER} --password ${SVN_SYNC_PW} --trust-server-cert file://${SVN_DIRECTORY}/${SVN_REPOSITORY} ${SVN_SYNC_MASTER}"
         echo "Creating SVN repository finished"
     fi
 
@@ -38,9 +37,9 @@ echo "SVN Sync started"
 while true
     do
     #Remove revprop (if importer was killed)
-    su - svnadm -c "svn propdel --revprop -r0 svn:sync-lock file://${SVN_DIRECTORY}/live"
+    su - svnadm -c "svn propdel --revprop -r0 svn:sync-lock file://${SVN_DIRECTORY}/${SVN_REPOSITORY}"
     #Start SVN Sync - Only one instance at a time
-    su - svnadm -c "svnsync sync --non-interactive --username ${SVN_SYNC_USER} --password ${SVN_SYNC_PW} --trust-server-cert file://${SVN_DIRECTORY}/live ${SVN_SYNC_MASTER} #>> /var/log/svnsync/live.log"
+    su - svnadm -c "svnsync sync --non-interactive --username ${SVN_SYNC_USER} --password ${SVN_SYNC_PW} --trust-server-cert file://${SVN_DIRECTORY}/${SVN_REPOSITORY} ${SVN_SYNC_MASTER} 
     #Exit code not applied since sync will autorestart in this loop
 done
 

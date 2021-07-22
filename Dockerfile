@@ -35,20 +35,13 @@ COPY ./fixes/robots.txt /var/www/html/robots.txt
 #COPY ./fixes/mpm_worker.conf /etc/apache2/mods-available/mpm_worker.conf
 COPY ./fixes/mpm_event.conf /etc/apache2/mods-available/mpm_event.conf
 
-#Remove default website
-#RUN rm -rf /var/www/html
-#RUN unlink /etc/apache2/sites-available/000-default.conf
-
 #Change defaults (e.g. global timeouts)
 COPY ./svn_config/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-#Enable Compression
-#COPY ./svn_config/deflate.conf /etc/apache2/mods-available/deflate.conf
-#COPY ./svn_config/dav_svn /etc/apache2/mods-available/dav_svn.conf
+#Copy files
 COPY ./svn_config/* /home/svnadm/
 
 #Set file system permissions
-#RUN  chown svnadm:svnadm /etc/apache2/mods-available/dav_svn.conf
 RUN  chown svnadm:svnadm /var/log/svnsync
 
 #Add entrypoint

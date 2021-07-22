@@ -6,6 +6,7 @@
   SVNCacheTextDeltas On
   SVNCacheFullTexts On
   SVNCacheRevProps on
+  SVNCompressionLevel 9
    # Limit write permission to list of valid users.
 #   <LimitExcept GET PROPFIND OPTIONS REPORT>
       # Require SSL connection for password protection.

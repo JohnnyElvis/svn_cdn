@@ -14,12 +14,12 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update &&\
 
 #Enable/Disable Apache features
 RUN a2enmod dav_svn &&\
-    a2enmod status &&\
-    a2enmod remoteip &&\
     a2dismod autoindex -f &&\
     a2dismod dir -f &&\
     a2dismod env -f &&\
     a2dismod setenvif -f 
+#    a2enmod status &&\
+#    a2enmod remoteip &&\
 #    a2dismod mpm_event &&\
 #    a2enmod mpm_worker
 

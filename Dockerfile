@@ -1,7 +1,7 @@
 FROM    ubuntu:latest
 
 #TZ "fix" to build ubuntu image
-ENV TZ=Europe/Vienna
+ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #Update & Install required applications

@@ -95,12 +95,12 @@ cat > /etc/apache2/conf-available/dav_svn.conf << EOL
   SVNCacheFullTexts On
   SVNCacheRevProps on
   SVNCompressionLevel ${SVNCompressionLevel}
+  SVNAllowBulkUpdates Off
 </IfModule>
 EOL
 
         #Set SVN UUID (same as in master repo)
         svnadmin setuuid ${SVN_DIRECTORY}/${SVN_REPOSITORY} ${SVN_UUID}
-
 
         #Assign hostname to apache
         echo ServerName ${SVN_FQDN} >> /etc/apache2/apache2.conf

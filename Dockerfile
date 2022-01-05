@@ -17,6 +17,7 @@ RUN a2enmod dav_svn &&\
     a2dismod autoindex -f &&\
     a2dismod dir -f &&\
     a2dismod env -f &&\
+    a2enmod status -f &&\
     a2dismod setenvif -f 
 #    a2enmod status &&\
 #    a2enmod remoteip &&\

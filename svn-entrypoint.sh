@@ -99,6 +99,20 @@ cat > /etc/apache2/conf-available/dav_svn.conf << EOL
 </IfModule>
 EOL
 
+#Create user for monitoring
+printf "${MONITORING_USER}:$(openssl passwd -crypt ${MONITORING_PASSWORD})\n" >> /etc/apache2/passwd-server-status
+
+#Configure mod_status
+cat > /etc/apache2/mods-enabled/status.conf << EOL
+<Location /server-status>
+    SetHandler server-status
+    AuthType basic
+    AuthName "Apache status"
+    AuthUserFile /etc/apache2/passwd-server-status
+    Require valid-user
+</Location>
+EOL
+
         #Set SVN UUID (same as in master repo)
         svnadmin setuuid ${SVN_DIRECTORY}/${SVN_REPOSITORY} ${SVN_UUID}
 

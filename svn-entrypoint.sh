@@ -100,19 +100,19 @@ cat > /etc/apache2/conf-available/dav_svn.conf << EOL
 EOL
 
 #Configure mod_status
-Listen 8001
-ExtendedStatus On
-<VirtualHost *:8001>
-    <Location /server-status>
-        SetHandler server-status
-        Order deny,allow
-        Deny from all
-        Allow from localhost ip6-localhost 
-    #    Allow from .example.com
-    </Location>
-</VirtualHost>
-</IfModule>
-EOL
+#Listen 8001
+#ExtendedStatus On
+#<VirtualHost *:8001>
+#    <Location /server-status>
+#        SetHandler server-status
+#        Order deny,allow
+#        Deny from all
+#        Allow from localhost ip6-localhost 
+#    #    Allow from .example.com
+#    </Location>
+#</VirtualHost>
+#</IfModule>
+#EOL
 
         #Set SVN UUID (same as in master repo)
         svnadmin setuuid ${SVN_DIRECTORY}/${SVN_REPOSITORY} ${SVN_UUID}

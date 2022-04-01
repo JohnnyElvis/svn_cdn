@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 #RUN apt-get update &&\
 RUN DEBIAN_FRONTEND="noninteractive" apt-get update &&\
     apt-get upgrade -y &&\
-    apt-get install apache2 apache2-utils subversion libsvn-dev libapache2-mod-svn -y &&\
+    apt-get install apache2 apache2-utils subversion libsvn-dev libapache2-mod-svn curl rsync -y &&\
     apt-get install procps iftop atop htop nmon dstat ioping -y &&\
     apt-get clean
 
